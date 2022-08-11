@@ -11,7 +11,7 @@ var Patt = new vehicle("chevy", "malibu", 2017, "blue");
 
 function myfunction() {
     document.getElementById("keywords").innerHTML=
-    "Dean drives a " + Dean.vehicle_color + " -colored" + Dean.vehicle_model +
+    "Dean drives a " + Dean.vehicle_color + " colored " + Dean.vehicle_model +
     " manufactured in " + Dean.vehicle_year;
 }
 
