@@ -56,7 +56,7 @@ let house= {
     description: function() {
         return "This house is a " + this.color + this.size +
         this.bedrooms + "bedroom, " + "built in " + this.year  + ".'";
-    };
+    }
     document.getElementById("houseobject").innerHTML= house.description;
 };
 }
