@@ -47,16 +47,24 @@ function return_function(){
     document.getElementById("demo").innerHTML= (X + Y);
 }
 
-function house() {
+function house_f() {
 let house= {
     size: "2,000 sq ft ",
     color: "light blue ",
     year: "1967",
     bedrooms: "four ",
-    description: function() {
-        return "This house is a " + this.color + this.size +
-        this.bedrooms + "bedroom, " + "built in " + this.year  + ".'";
+    description: function house_f() {
+        return "This house is a " + house.color + house.size +
+        house.bedrooms + "bedroom, " + "built in " + house.year  + ".'";
     }
+}
     document.getElementById("houseobject").innerHTML= house.description;
 };
+
+function break_function() {
+    for (let i = 0; i < 10; i++) {
+        if (i === 3) { break; }
+        text = "The number is " + i + "<br>";
+    }
+    document.getElementById("break").innerHTML = text;
 }
