@@ -90,7 +90,7 @@ function Update_Display() {
 }
 
 Update_Display();
-//moniters button clicks
+//monitors button clicks
 const keys = document.querySelector('.calculator-keys');
 keys.addEventListener('click', (event) => {
     //the target variable is an object that reps the 
@@ -103,7 +103,7 @@ keys.addEventListener('click', (event) => {
     if (target.classList.contains('operator')) {
         Handle_Operator(target.value);
         Update_Display();
-        return
+        return;
     }
     if (target.classList.contains('decimal')) {
         Input_Decimal(target.value);
