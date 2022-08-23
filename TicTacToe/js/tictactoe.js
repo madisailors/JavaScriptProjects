@@ -22,10 +22,12 @@ function placeXOrO(squareNumber) {
         } else {
             activePlayer = 'X';
         }
+    }
+}
 
-        //this function parses the selectedSquares array to search for win conditions
-        //drawLine() function is called to draw a line on the screen if the condition is met
-        function checkWinConditions() {
+//this function parses the selectedSquares array to search for win conditions
+//drawLine() function is called to draw a line on the screen if the condition is met
+function checkWinConditions() {
             // X 0,1,2 condition
             if (arrayIncludes('0X','1X','2X')) {drawLine(50, 100, 558, 100)}
             // X 3,4,5 condition
@@ -76,7 +78,7 @@ function placeXOrO(squareNumber) {
                 //then true is returned and our else if condition executes drawLine()
                 if (a === true && b === true && c === true) {return true;}
             }
-                }
+        }
 
         //This function plays placement sound
         Audio('./media/place.mp3');
@@ -89,7 +91,7 @@ function placeXOrO(squareNumber) {
 
         //returning true is needed for our computersTurn() function to work
         return true;
-    }
+    
 
     //this function results in random square being selected by comp
     function computersTurn() {
@@ -184,4 +186,4 @@ function placeXOrO(squareNumber) {
     animateLineDrawing();
     //waits 1 seconds, then clears canvas and resets game
     setTimeout(function () {clear(); resetGame();}, 1000);
-}
+
