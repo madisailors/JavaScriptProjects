@@ -80,26 +80,24 @@ function checkWinConditions() {
             }
         }
 
-        //This function plays placement sound
-        Audio('./media/place.mp3');
-        //this condition checks to see if it's the comps turn
-        if (activePlayer === 'O') {
-            //disables clicking for comps turn
-            disableClick();
-            setTimeout(function () { computersTurn(); }, 1000);
+//This function plays placement sound
+ Audio('./media/place1.mp3');
+     //this condition checks to see if it's the comps turn
+     if (activePlayer === 'O') {
+        //disables clicking for comps turn
+        disableClick();
+        setTimeout(function () { computersTurn(); }, 1000);
         }
+    //returning true is needed for our computersTurn() function to work
+    return true;
 
-        //returning true is needed for our computersTurn() function to work
-        return true;
-    
-
-    //this function results in random square being selected by comp
-    function computersTurn() {
-        //boolean needed for our while loop
-        let success = false;
-        //variable stores random number 0-8
-        let pickASquare;
-        //condition allows our while loop to keep trying if a square is selected
+//this function results in random square being selected by comp
+function computersTurn() {
+    //boolean needed for our while loop
+    let success = false;
+    //variable stores random number 0-8
+     let pickASquare;
+    //condition allows our while loop to keep trying if a square is selected
         while (!success) {
             pickASquare = String(Math.floor(Math.random() * 9));
             if (placeXOrO(pickASquare)) {
@@ -110,8 +108,8 @@ function checkWinConditions() {
         }
     }
 
-    //this function makes our body element temporarily unclickable
-    function disableClick() {
+//this function makes our body element temporarily unclickable
+function disableClick() {
         //makes body unclickable
         body.style.pointerEvents= 'none';
         //makes clickable after 1 second
@@ -181,9 +179,21 @@ function checkWinConditions() {
     //disallows clicking while win sound is playing
     disableClick();
     //plays win sound
-    Audio('./media/winGame.mp3');
+    Audio('./media/win.mp3');
     //calls main animation loop
     animateLineDrawing();
     //waits 1 seconds, then clears canvas and resets game
     setTimeout(function () {clear(); resetGame();}, 1000);
 
+    //resets game in event of tie or win
+    function resetGame() {
+        //for loop iterates through each HTML square element 
+        for (let i = 0; i < 9; i++) {
+            //variable gets HMTL element i
+            let square = document.getElementById(String(i));
+            //removes background image
+            square.style.backgroundImage = '';
+        }
+        //resets array to start over
+        selectedSquares = [];
+    }
