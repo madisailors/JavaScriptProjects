@@ -149,7 +149,7 @@ function disableClick() {
         //set swidth of our line
         c.lineWidth = 10;
         //color
-        c.strokeStyle = 'rgba(70,255,33,.8)';
+        c.strokeStyle = 'rgba(70, 255, 33, .8)';
         //draws out everything we laid out above
         c.stroke();
         //checks if we've reached endpoints
@@ -159,42 +159,44 @@ function disableClick() {
             //adds 10 to previous end y point
             if (y < y2) {y += 10; }
             //condition necesarry for 2,4,6 win conditions
-            if (x >= x2 && y >= y2) {cancelAnimationFrame(animationLoop);}
+            if (x >= x2 && y >= y2) { cancelAnimationFrame(animationLoop); }
 
         }
         if (x1 <= x2 && y1 >= y2) {
             if (x < x2) {x += 10;}
             if (y > y2) {y -= 10;}
-            if (x >= x2 && y <= y2) {cancelAnimationFrame(animationLoop); }
+            if (x >= x2 && y <= y2) { cancelAnimationFrame(animationLoop); }
         }
-    }
+        //resets game in event of tie or win
+   // this function clears our canvas after our win line is drawn
+   function clear() {
+    //starts our animation loop
+    const animationLoop = requestAnimationFrame(clear);
+    c.clearRect(0,0,608,608);
+    //stops ainmation loop
+    cancelAnimationFrame(animationLoop);
 }
-    // this function clears our canvas after our win line is drawn
-    function clear() {
-        //starts our animation loop
-        const animationLoop = requestAnimationFrame(clear);
-        c.clearRect(0,0,608,608);
-        //stops ainmation loop
-        cancelAnimationFrame(animationLoop);
+//disallows clicking while win sound is playing
+disableClick();
+//plays win sound
+audio('./media/win.mp3');
+//calls main animation loop
+animateLineDrawing();
+//waits 1 seconds, then clears canvas and resets game
+setTimeout(function () {clear(); resetGame();}, 1000);
     }
-    //disallows clicking while win sound is playing
-    disableClick();
-    //plays win sound
-    audio('./media/win.mp3');
-    //calls main animation loop
-    animateLineDrawing();
-    //waits 1 seconds, then clears canvas and resets game
-    setTimeout(function () {clear(); resetGame();}, 1000);
-
-    //resets game in event of tie or win
-    function resetGame() {
-        //for loop iterates through each HTML square element 
-        for (let i = 0; i < 9; i++) {
-            //variable gets HMTL element i
-            let square = document.getElementById(String(i));
-            //removes background image
-            square.style.backgroundImage = '';
+function resetGame() {
+    //for loop iterates through each HTML square element 
+    for (let i = 0; i < 9; i++) {
+        //variable gets HMTL element i
+        let square = document.getElementById(String(i));
+        //removes background image
+        square.style.backgroundImage = '';
         }
         //resets array to start over
         selectedSquares = [];
     }
+}
+   
+
+    
