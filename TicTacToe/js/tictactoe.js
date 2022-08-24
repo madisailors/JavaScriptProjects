@@ -175,7 +175,8 @@ function disableClick() {
     c.clearRect(0,0,608,608);
     //stops ainmation loop
     cancelAnimationFrame(animationLoop);
-}
+   }
+
 //disallows clicking while win sound is playing
 disableClick();
 //plays win sound
@@ -183,8 +184,9 @@ audio('./media/win.mp3');
 //calls main animation loop
 animateLineDrawing();
 //waits 1 seconds, then clears canvas and resets game
-setTimeout(function () {clear(); resetGame();}, 1000);
-    }
+setTimeout(function () { clear(); resetGame(); }, 1000);
+}
+
 function resetGame() {
     //for loop iterates through each HTML square element 
     for (let i = 0; i < 9; i++) {
