@@ -6,7 +6,7 @@ const Calculator = {
     First_Operand: null,
     //checks wether ot not the second operand has been inputted by the user
     Wait_Second_Operand: false,
-    operater: null,
+    operator: null,
 };
 
 //modifies value each time a button is clicked on
@@ -63,7 +63,7 @@ function Handle_Operator(Next_Operator) {
         Calculator.First_Operand = parseFloat(result);
     }
     Calculator.Wait_Second_Operand = true;
-    Calculator.operater = Next_Operator;
+    Calculator.operator = Next_Operator;
 }
 
 const Preform_Calculation = {
@@ -78,7 +78,7 @@ function Calculator_Reset() {
     Calculator.Display_Value = '0';
     Calculator.First_Operand = null;
     Calculator.Wait_Second_Operand = false;
-    Calculator.operater = null;
+    Calculator.operator = null;
 }
 
 //this function updates the calculator screen with contents of displayvalue
