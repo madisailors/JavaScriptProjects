@@ -22,7 +22,6 @@ function placeXOrO(squareNumber) {
         } else {
             activePlayer = 'X';
         }
-    }
     //This function plays placement sound
  audio('./media/place1.mp3');
  //this condition checks to see if it's the comps turn
@@ -31,26 +30,28 @@ function placeXOrO(squareNumber) {
     disableClick();
     setTimeout(function () { computersTurn(); }, 1000);
     }
-//returning true is needed for our computersTurn() function to work
-return true;
-
-//this function results in random square being selected by comp
-function computersTurn() {
-//boolean needed for our while loop
-let success = false;
-//variable stores random number 0-8
- let pickASquare;
-//condition allows our while loop to keep trying if a square is selected
-    while (!success) {
-        pickASquare = String(Math.floor(Math.random() * 9));
-        if (placeXOrO(pickASquare)) {
-            //this line calls the function
-            placeXOrO(pickASquare);
-            success = true;
-        };
+    //returning true is needed for our computersTurn() function to work
+    return true;
+}
+    //this function results in random square being selected by comp
+    function computersTurn() {
+    //boolean needed for our while loop
+    let success = false;
+    //variable stores random number 0-8
+    let pickASquare;
+    //condition allows our while loop to keep trying if a square is selected
+        while (!success) {
+            pickASquare = String(Math.floor(Math.random() * 9));
+            if (placeXOrO(pickASquare)) {
+                //this line calls the function
+                placeXOrO(pickASquare);
+                success = true;
+            };
+        }
     }
 }
-}
+
+
 
 //this function parses the selectedSquares array to search for win conditions
 //drawLine() function is called to draw a line on the screen if the condition is met
@@ -90,10 +91,11 @@ function checkWinConditions() {
             //This condition checks for a tie 
             else if (selectedSquares.length >= 9) {
                 //plays tie sound
-                Audio('./media/tie.mp3');
+                audio('./media/tie.mp3');
                 //this sets a .3 sec timer before resetGame is called
                 setTimeout(function () {resetGame();}, 500);
             }
+}
 
             //checks if any array includes 3 strings
             function arrayIncludes(squareA, squareB, squareC) {
@@ -105,7 +107,6 @@ function checkWinConditions() {
                 //then true is returned and our else if condition executes drawLine()
                 if (a === true && b === true && c === true) {return true;}
             }
-        }
 
 
 //this function makes our body element temporarily unclickable
@@ -121,19 +122,17 @@ function disableClick() {
         audio.play();
     }
     
-    //this function utilizes html canvas to draw win lines
-    function drawWinLine(coordX1, coordY1, coordX2, coordY2) {
-        const canvas = document.getElementById('win-lines');
-        const c = canvas.getContext('2d'); //gives access to methods and properties to use on canvas
-        //indicates where the start of a lines X axis is
-        let x1= coordX1,
-            y1= coordY1,
-            x2= coordX2,
-            y2= coordY2,
-            x = x1,
-            y = y1;
-    
-
+ //this function utilizes html canvas to draw win lines
+function drawWinLine(coordX1, coordY1, coordX2, coordY2) {
+    const canvas = document.getElementById('win-lines');
+    const c = canvas.getContext('2d'); //gives access to methods and properties to use on canvas
+    //indicates where the start of a lines X axis is
+    let x1= coordX1,
+        y1= coordY1,
+        x2= coordX2,
+        y2= coordY2,
+        x = x1,
+        y = y1;
     //this function interacts with the canvas
     function animateLineDrawing() {
         //this variable creates a loop
@@ -167,7 +166,29 @@ function disableClick() {
             if (y > y2) {y -= 10;}
             if (x >= x2 && y <= y2) { cancelAnimationFrame(animationLoop); }
         }
-        //resets game in event of tie or win
+    }
+    function resetGame() {
+         //for loop iterates through each HTML square element 
+        for (let i = 0; i < 9; i++) {
+            //variable gets HMTL element i
+            let square = document.getElementById(String(i));
+            //removes background image
+            square.style.backgroundImage = '';
+        }
+            //resets array to start over
+            selectedSquares = []; 
+    }
+    //disallows clicking while win sound is playing
+disableClick();
+//plays win sound
+audio('./media/win.mp3');
+//calls main animation loop
+animateLineDrawing();
+//waits 1 seconds, then clears canvas and resets game
+setTimeout(function () { clear(); resetGame(); }, 1000);
+
+}
+    //resets game in event of tie or win
    // this function clears our canvas after our win line is drawn
    function clear() {
     //starts our animation loop
@@ -177,28 +198,8 @@ function disableClick() {
     cancelAnimationFrame(animationLoop);
    }
 
-//disallows clicking while win sound is playing
-disableClick();
-//plays win sound
-audio('./media/win.mp3');
-//calls main animation loop
-animateLineDrawing();
-//waits 1 seconds, then clears canvas and resets game
-setTimeout(function () { clear(); resetGame(); }, 1000);
-}
 
-function resetGame() {
-    //for loop iterates through each HTML square element 
-    for (let i = 0; i < 9; i++) {
-        //variable gets HMTL element i
-        let square = document.getElementById(String(i));
-        //removes background image
-        square.style.backgroundImage = '';
-        }
-        //resets array to start over
-        selectedSquares = [];
-    }
-}
-   
+
+
 
     
